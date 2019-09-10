@@ -1,0 +1,19 @@
+form {
+
+    div {
+        &.form-group {
+            float: none;
+            clear: both;
+
+        }
+        &.half-width {
+            float: left;
+            clear: none;
+            width: 49%;
+            
+            &:first-child {
+                margin-right: 2%;
+            }
+        };
+    }
+}
