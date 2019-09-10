@@ -2,7 +2,7 @@ import React from 'react';
 
 
 const Input = (props) => {
-  console.log(props.className);
+  //console.log(props.className);
   let classWidth = "form-group";
   if (
     (props.className) && 
@@ -10,7 +10,7 @@ const Input = (props) => {
   ) { classWidth += " half-width"; }
 	return (  
   <div className={classWidth}>
-    <label for={props.name} className="form-label">{props.title}</label>
+    <label htmlFor={props.name} className="form-label">{props.title}</label>
     <input
       className="form-control"
       id={props.name}

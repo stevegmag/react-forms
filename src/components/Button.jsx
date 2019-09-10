@@ -2,7 +2,7 @@ import React from 'react';
 
 
 const Button = (props) => {
-	console.log(props.style);
+	//console.log(props.style);
 	let btnType = "btn"
 	if( props.type ) {
 		btnType += " btn-"+props.type;
