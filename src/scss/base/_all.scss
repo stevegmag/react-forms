@@ -1,9 +1,12 @@
-body {
+*, body, .container-fluid {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
 }
-
+.main-container {
+  content: '';
+ // background-image: url('./wald-form-images/Jabreau-2560x1440.jpg');
+}
 
 .App {
     text-align: center;

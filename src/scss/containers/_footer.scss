@@ -1,5 +1,19 @@
 footer {
+    margin: 35px 0 0 0;
+    padding: 15px;
+    background-color: #4c210c;
+    color: #fff;
+    text-align: center;
+    
     h3.contact {
-        color: red;
+        color: #fff;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    a {
+        color: yellow;
     }
 }

@@ -1,6 +1,10 @@
 header {
-    padding: 15px;
     background-color: #0085a3;
+
+    &.container-fluid {
+        margin: 0 0 35px 0;
+        padding: 25px;
+    }
 
     &::after {
         content: '';

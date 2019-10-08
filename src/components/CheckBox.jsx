@@ -9,21 +9,19 @@ const CheckBox = (props) => {
         {props.options.map(option => {
           return (
             <label key={option} className="checkbox-inline">
-              <input
-              
+              <input              
                 id = {props.name}
-                name={props.name}
-                onChange={props.handleChange}
-                value={option}
-                checked={ props.selectedOptions.indexOf(option) > -1 }
-                type="checkbox" /> {option}
+                name = {props.name}
+                onChange = {props.handleChange}
+                value = {option}
+                checked = { props.selectedOptions.indexOf(option) > -1 }
+                type = "checkbox" /> {option}
             </label>
           );
         })}
       </div>
     </div>
-);
-
-}
+  );
+} //CheckBox
 
 export default CheckBox;

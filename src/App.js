@@ -9,18 +9,20 @@ import ContentContainer from './containers/ContentContainer';
 class App extends Component {
   render() {
     return (
-      <div className="container">
+      <div className="container-fluid">
         
         <HeaderContainer />
 
-        <div className="col-md-6">
-          <h1> Content Container </h1>    
-          <ContentContainer />      
-        </div>
+        <div className="main-container container">
+          <div className="col-md-6">
+            <h1> Content Container </h1>    
+            <ContentContainer />      
+          </div>
 
-        <div className="col-md-6">
-          <h3> Form Container </h3>
-          <FormContainer />
+          <div className="col-md-6">
+            <h3> Form Container </h3>
+            <FormContainer />
+          </div>
         </div>
         
         <FooterContainer />
