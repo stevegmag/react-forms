@@ -9,7 +9,8 @@ const CheckBox = (props) => {
         {props.options.map(option => {
           return (
             <label key={option} className="checkbox-inline">
-              <input              
+              <input       
+                key = {props.name}       
                 id = {props.name}
                 name = {props.name}
                 onChange = {props.handleChange}

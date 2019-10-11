@@ -2,7 +2,7 @@ import React from 'react';
 
 
 const Input = (props) => {
-  //console.log(props.className);
+  console.log(props.inputtype);
   let classWidth = "form-group";
   if (
     (props.className) && 
@@ -12,14 +12,15 @@ const Input = (props) => {
   <div className={classWidth}>
     <label htmlFor={props.name} className="form-label">{props.title}</label>
     <input
+      key = {props.name}
       className = "form-control"
       id = {props.name}
       name = {props.name}
-      type = {props.inputType}
+      type = {props.inputtype}
       value = {props.value}
-      onChange = {props.handleChange}
+      onChange = {props.handlechange}
       placeholder = {props.placeholder} 
-      {...props} />
+    />
   </div>
 )
 }

@@ -6,20 +6,25 @@ const Countries = (props) => {
         <div className="form-group">
 			<label htmlFor={props.name}> {props.title} </label>
 		    <select
+              key = {props.name}
 		      id = {props.name}
-		      name={props.name}
-		      value={props.value}
-		      onChange={props.handleChange}
-		      className="form-control">
+		      name = {props.name}
+              value = { props.multiple ? props.value : props.value.toString() }
+              multiple = {props.multiple}
+		      onChange = {props.handlechange}
+		      className = "form-control"
+            >
 		      <option value="" disabled>{props.placeholder}</option>
-		      {countryList.map(option => {
-		        return (
-		          <option
-		            key={option}
-		            value={option.code}
-		            label={option.name}>{option.name}</option>
-		        );
-		      })}
+		      {
+                countryList.map(option => {
+                    return (
+                    <option
+                        key = {props.name + '_' + option.code}
+                        value = {option.code}
+                        label = {option.name}>{option.name}</option>
+                    );
+                })
+              }
 		    </select>
         </div>
     );
