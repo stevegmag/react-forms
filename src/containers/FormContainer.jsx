@@ -28,19 +28,6 @@ const degreeOptions = [
   'Doctorate'
 ];
 
-//,
-// {
-//   name: 'Bachelors',
-//   options: ['BS in Business and Management', 'BS in Marketing']
-// },
-// {
-//   name: 'Certificate',
-//   options: ['Graduate Certificate in Business and Management', 'Graduate Certificate in Digital Marketing']
-// },
-// {
-//   name: 'Doctorate',
-//   options: ['Doctor of Business Administration (DBA) - Accounting','Doctor of Business Administration (DBA) - Accounting']
-// }
 const poiOptions = [
   { 
     aoi: 'Business and Management', 
@@ -92,14 +79,6 @@ const poiOptions = [
       }
     ]
   }
-  // 'Education',
-  // 'Information Technology',
-  // 'Nursing',
-  // 'Psychology and Counseling',
-  // 'Public Health and Health Sciences',
-  // 'Public Policy and Administration',
-  // 'Social Work and Human Services',
-  // 'Undergraduate Studies'
 ];
 
 class FormContainer extends Component {  
@@ -256,7 +235,7 @@ class FormContainer extends Component {
     if ( (aoi.length > 0) && (degree.length > 0) ) {
       console.log("aoi and degree set");
       let options = [];
-      let filteredAOI = poiOptions.filter(e => e.aoi == aoi);
+      let filteredAOI = poiOptions.filter(e => e.aoi === aoi);
       console.log('filteredAOI:  ', filteredAOI); 
 
       // let filteredDegree = filteredAOI.map(e.filter( e => e.degree == degree));
@@ -271,6 +250,8 @@ class FormContainer extends Component {
   
         options = [...options, ...degrees];
         console.log('options:  ', options); 
+
+        return false;
       });
 
       //poiOptions.filter(option => option.aoi == aoi && option.degree == degree );
@@ -278,7 +259,7 @@ class FormContainer extends Component {
       this.setState(prevState => ({
         ...prevState, poiOptions: options
       }), 
-      ()=>{
+      () => {
         console.log(this.state); 
       }
     )
@@ -368,7 +349,6 @@ class FormContainer extends Component {
           name = {'email'}
           title = {'Email Address'} 
           value ={this.state.newUser.email} 
-          title = {'Email Address'} 
           placeholder = {'Enter your email address'}
           handlechange = {this.handleEmail} 
         /> {/* email */} 
@@ -378,7 +358,6 @@ class FormContainer extends Component {
           name = {'phone_number'}
           title = {'Phone Number'} 
           value = {this.state.newUser.phoneNumber} 
-          title = {'Phone Number'} 
           placeholder = {'Enter your phone number'}
           handlechange = {this.handlePhoneNumber} 
         /> {/* Phone Number */} 

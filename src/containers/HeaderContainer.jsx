@@ -18,7 +18,7 @@ class HeaderContainer extends Component {
             <header className="container-fluid">
                 <div className="container">
                     <div className="col-md-6">
-                        <a href="#"><img src={logo} className="logo" /></a>
+                        <a href="/"><img src={logo} className="logo" alt="WaldenU" /></a>
                     </div>
                     <div className="col-md-6">
 

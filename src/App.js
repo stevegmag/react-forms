@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.min.css';
 import FormContainer from './containers/FormContainer';
 import HeaderContainer from './containers/HeaderContainer';

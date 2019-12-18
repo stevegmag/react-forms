@@ -21,7 +21,7 @@ class FooterContainer extends Component {
                             </li>
                         </ul>
                         <p className="copyright">© 2018 Test University. All Rights Reserved.</p>
-                        <p>To access the electronic version of the Annual Security Report, <a href="https://www.Testu.edu/-/media/Test/files/legal/2018-clery-act-security-report-v-2.pdf?la=en" target="_blank">click here</a>. Paper copies available upon request.</p>
+                        <p>To access the electronic version of the Annual Security Report, <a href="https://www.Testu.edu/-/media/Test/files/legal/2018-clery-act-security-report-v-2.pdf?la=en" target="_blank" rel="noopener noreferrer">click here</a>. Paper copies available upon request.</p>
                     </div>
                 </div>
             </footer>
