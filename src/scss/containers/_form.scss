@@ -14,6 +14,18 @@ form {
             &:first-child {
                 margin-right: 2%;
             }
-        };
+        }
+        &.errContainer {
+            input.form-control,
+            select.form-control  {
+                border-color: #cc0000;
+            }
+        }
+        .errorMsg {
+            width: 100%;
+            color: #cc0000;
+            margin-bottom: 12px;
+        }
+        
     }
 }

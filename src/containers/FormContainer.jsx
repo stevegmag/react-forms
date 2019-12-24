@@ -1,12 +1,13 @@
 import React, {Component} from 'react';  
 
 /* Import Components */
-//import CheckBox       from '../components/CheckBox';  
-import Input          from '../components/Input';  
-//import TextArea       from '../components/TextArea';  
-import Select         from '../components/Select'; 
-import Countries      from '../components/Countries';
-import Button         from '../components/Button';
+//import CheckBox           from '../components/CheckBox';  
+import Input                from '../components/Input';  
+//import TextArea           from '../components/TextArea';  
+import Select               from '../components/Select'; 
+import Countries            from '../components/Countries';
+import Button               from '../components/Button';
+//import ValidateForm         from '../components/ValidateForm';
 
 const aoiOptions = [
   'Business and Management',
@@ -102,12 +103,15 @@ class FormContainer extends Component {
       aoiOptions, 
       degreeOptions,
       poiOptions: [],
+      fields: {},
+      errors: {}
 
     } //state
 
     this.handleInput            = this.handleInput.bind(this);
     this.handleCheckBox         = this.handleCheckBox.bind(this);
     this.handleTextArea         = this.handleTextArea.bind(this);
+    this.handleCountry          = this.handleCountry.bind(this);
     this.handleEmail            = this.handleEmail.bind(this);
     this.handlePhoneNumber      = this.handlePhoneNumber.bind(this);
     this.handleFirstName        = this.handleFirstName.bind(this);
@@ -118,6 +122,7 @@ class FormContainer extends Component {
     this.handleInputPOIOptions  = this.handleInputPOIOptions.bind(this);
     this.handleFormSubmit       = this.handleFormSubmit.bind(this);
     this.handleClearForm        = this.handleClearForm.bind(this);
+    this.validateForm           = this.validateForm.bind(this);
   } //construtor
 
   /* This lifecycle hook gets executed when the component mounts */
@@ -133,11 +138,14 @@ class FormContainer extends Component {
   
   handleFirstName(e) {
     console.log("Inside handleFirstName");
-   let value = e.target.value;
-   let name = e.target.name;
-   this.setState( prevState => ({ newUser : 
-      {...prevState.newUser, [name]: value }
-    }), () => console.log(this.state.newUser))
+    let value = e.target.value;
+    let name = e.target.name;
+
+    // this.validateForm(e);
+
+    this.setState( prevState => ({ newUser : 
+      {...prevState.newUser, firstName: value }
+    }), () => console.log('first name: ' + this.state.newUser.firstName))
   } //handleFirstName
 
   handleLastName(e) {
@@ -145,7 +153,7 @@ class FormContainer extends Component {
     let value = e.target.value;
     let name = e.target.name;
     this.setState( prevState => ({ newUser : 
-      {...prevState.newUser, [name]: value }
+      {...prevState.newUser, lastName: value }
     }), () => console.log(this.state.newUser))
    } //handleLastName
 
@@ -154,7 +162,7 @@ class FormContainer extends Component {
     let value = e.target.value;
     let name = e.target.name;
     this.setState( prevState => ({ newUser : 
-      {...prevState.newUser, [name]: value }
+      {...prevState.newUser, email: value }
     }), () => console.log(this.state.newUser))
   } //handleEmail
 
@@ -163,7 +171,7 @@ class FormContainer extends Component {
     let value = e.target.value;
     let name = e.target.name;
     this.setState( prevState => ({ newUser : 
-      {...prevState.newUser, [name]: value }
+      {...prevState.newUser, phoneNumber: value }
     }), () => console.log(this.state.newUser))
   } //handlePhoneNumber
 
@@ -194,6 +202,23 @@ class FormContainer extends Component {
       })
     )
   } //handleCheckBox
+  
+  handleCountry(e) {
+    console.log("Inside handleCountry");
+    let value = e.target.value;
+    let name = e.target.name;
+
+    // this.validateForm(e);
+
+    this.setState(prevState => ({
+        newUser: {...prevState.newUser, country: value }
+      }), 
+      ()=>{
+        console.log(this.state.newUser); 
+        this.handleInputPOIOptions()
+      }  
+    )
+  } //handleInputAOI
 
   handleInputAOI(e) {
     console.log("Inside handleInputAOI");
@@ -319,11 +344,112 @@ class FormContainer extends Component {
     })
   } //handleClearForm
 
+  validateForm(e) {
+    console.log("Inside validateForm: " + e.target.name);
+    e.preventDefault();
+
+    let fields = this.state.newUser;
+    let errors = this.state.errors;
+    let formIsValid = true;
+
+    // firstname
+    if(e.target.name ==="first_name") {
+      if (!fields["firstName"]) {
+        formIsValid = false;
+        errors["firstName"] = "*Please enter your First Name.";
+        console.log("firstName validateForm: " + formIsValid);
+      }
+      else errors["firstName"] = null;
+
+      if (typeof fields["firstName"] !== "undefined") {
+        if (!fields["firstName"].match(/^[a-zA-Z ]*$/)) {
+          formIsValid = false;
+          errors["firstName"] = "*Please enter alphabet characters only.";
+          console.log("firstName validateForm: " + formIsValid);
+        }
+      }
+    }
+    
+    // lastname
+    if(e.target.name ==="last_name") {
+      if (!fields["lastName"]) {
+        formIsValid = false;
+        errors["lastName"] = "*Please enter your Last Name.";
+        console.log("lastName validateForm: " + formIsValid);
+      }
+      else errors["lastName"] = null;
+
+      if (typeof fields["lastName"] !== "undefined") {
+        if (!fields["lastName"].match(/^[a-zA-Z ]*$/)) {
+          formIsValid = false;
+          errors["lastName"] = "*Please enter alphabet characters only.";
+          console.log("lastName validateForm: " + formIsValid);
+        }
+      }
+    }
+    
+    // email
+    if(e.target.name ==="email") {
+      if (!fields["email"]) {
+        formIsValid = false;
+        errors["email"] = "*Please enter your email.";
+        console.log("email validateForm: " + formIsValid);
+      }
+      else errors["email"] = null;
+
+      if (typeof fields["email"] !== "undefined") {
+        //regular expression for email validation
+        var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+        if (!pattern.test(fields["email"])) {
+          formIsValid = false;
+          errors["email"] = "*Please enter valid email.";
+          console.log("email validateForm: " + formIsValid);
+        }
+      }
+    }
+    
+    // phoneNumber
+    if(e.target.name ==="phone_number") {
+      if (!fields["phoneNumber"]) {
+        formIsValid = false;
+        errors["phoneNumber"] = "*Please enter your phone number.";
+        console.log("phoneNumber validateForm: " + formIsValid);
+      }
+      else errors["phoneNumber"] = null;
+
+      if (typeof fields["phoneNumber"] !== "undefined") {
+        //regular expression for email validation
+        var pattern = new RegExp(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im);
+        if (!pattern.test(fields["phoneNumber"])) {
+          formIsValid = false;
+          errors["phoneNumber"] = "*Please enter valid phone number.";
+          console.log("phoneNumber validateForm: " + formIsValid);
+        }
+      }
+    }
+    
+    // country
+    if(e.target.name ==="country") {
+      if (!fields["country"]) {
+        console.log("country validateForm: " + fields["country"]);
+        formIsValid = false;
+        errors["country"] = "*Please select a country.";
+        console.log("country validateForm: " + formIsValid);
+      }
+      else errors["country"] = null;
+    }
+
+    this.setState({
+      errors: errors
+    });
+    return formIsValid;
+  } //validateForm
+
   render() {
     return (
     
       <form className="container-fluid" onSubmit={this.handleFormSubmit}>
-      
+
         <Input 
           inputtype = {'text'}
           title = {'First Name'} 
@@ -331,16 +457,20 @@ class FormContainer extends Component {
           value = {this.state.newUser.firstName} 
           placeholder = {'Enter your first name'}
           handlechange = {this.handleFirstName}
+          onBlur = {this.validateForm}
+          err = {this.state.errors.firstName}
           className = {'form-control half-width'}            
-        /> {/* First Name of the user */}
+        /> {/* First Name of the user */}  
 
         <Input 
           inputtype ={'text'}
           title = {'Last Name'} 
           name = {'last_name'}
           value = {this.state.newUser.lastName} 
-          placeholder = {'Enter your first name'}
+          placeholder = {'Enter your last name'}
           handlechange = {this.handleLastName}
+          onBlur = {this.validateForm}
+          err = {this.state.errors.lastName}
           className = {'form-control half-width'}            
         /> {/* Last Name of the user */}
       
@@ -351,6 +481,8 @@ class FormContainer extends Component {
           value ={this.state.newUser.email} 
           placeholder = {'Enter your email address'}
           handlechange = {this.handleEmail} 
+          onBlur = {this.validateForm}
+          err = {this.state.errors.email}
         /> {/* email */} 
       
         <Input 
@@ -360,15 +492,19 @@ class FormContainer extends Component {
           value = {this.state.newUser.phoneNumber} 
           placeholder = {'Enter your phone number'}
           handlechange = {this.handlePhoneNumber} 
+          onBlur = {this.validateForm}
+          err = {this.state.errors.phoneNumber}
         /> {/* Phone Number */} 
 
         <Countries 
-          title = {'Countries'}
+          title = {'Country'}
           name = {'country'}
           value = {this.state.newUser.country}
 					multiple = {false}
           placeholder = {'Select Country'}
-          handlechange = {this.handleInput}
+          handlechange = {this.handleCountry}
+          focusout = {this.validateForm}
+          err = {this.state.errors.country}
         /> {/* country Selection */}
 <hr />
 

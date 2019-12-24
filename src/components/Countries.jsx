@@ -2,8 +2,14 @@ import React from 'react';
 
 
 const Countries = (props) => {
+	console.log(props);
+
+    let containerClasses = "form-group";
+
+    if (props.err) { containerClasses += " errContainer"; }
+    
 	return(
-        <div className="form-group">
+        <div className={containerClasses}>
 			<label htmlFor={props.name}> {props.title} </label>
 		    <select
               key = {props.name}
@@ -12,6 +18,8 @@ const Countries = (props) => {
               value = { props.multiple ? props.value : props.value.toString() }
               multiple = {props.multiple}
 		      onChange = {props.handlechange}
+              focusout = {props.validateForm}
+              err = {props.err}
 		      className = "form-control"
             >
 		      <option value="" disabled>{props.placeholder}</option>
@@ -26,6 +34,7 @@ const Countries = (props) => {
                 })
               }
 		    </select>
+            <div className="errorMsg">{props.err}</div>
         </div>
     );
 }

@@ -3,13 +3,14 @@ import React from 'react';
 
 const Input = (props) => {
   console.log(props.inputtype);
-  let classWidth = "form-group";
+  let containerClasses = "form-group";
   if (
     (props.className) && 
     (props.className.indexOf("half-width") > -1)
-  ) { classWidth += " half-width"; }
+  ) { containerClasses += " half-width"; }
+  if (props.err) { containerClasses += " errContainer"; }
 	return (  
-  <div className={classWidth}>
+  <div className={containerClasses}>
     <label htmlFor={props.name} className="form-label">{props.title}</label>
     <input
       key = {props.name}
@@ -19,8 +20,11 @@ const Input = (props) => {
       type = {props.inputtype}
       value = {props.value}
       onChange = {props.handlechange}
+      onBlur = {props.onBlur}
+      err = {props.err}
       placeholder = {props.placeholder} 
     />
+    <div className="errorMsg">{props.err}</div>
   </div>
 )
 }
