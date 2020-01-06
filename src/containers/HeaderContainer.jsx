@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import Button from '../components/Button'
+import Button from '../components/Button';
+import logo from '../wald-form-images/logo.png';
 
 
 const buttonStyle = {
     margin : '10px 10px 10px 10px'
 }
-let logo = "./wald-form-images/logo.png";
 
 class HeaderContainer extends Component {  
     constructor(props) {

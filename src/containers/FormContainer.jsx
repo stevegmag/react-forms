@@ -534,7 +534,7 @@ class FormContainer extends Component {
           options = {this.state.poiOptions} 
           value = {this.state.newUser.poi}
 					multiple = {false}
-          placeholder = {'Select Projram of Interest'}
+          placeholder = {'Select Program of Interest'}
           handlechange = {this.handleInputPOI}
         />  {/* Program of Interest Selection */}
 
